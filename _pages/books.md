@@ -16,11 +16,7 @@ permalink: "/books"
 <div class="col-md-4">
 
 <div class="sticky-top sticky-top-80">
-<h5>Buy the texbook</h5>
 
-<p>Thank you for your support! </p>
-
-<p><a target="_blank" href="https://www.amazon.com/dp/9814968374/ref=cm_sw_r_tw_dp_N90F7KX6CXG9ZV4GEQ84" class="btn btn-danger">Amazon</a> <a target="_blank" href="https://www.routledge.com/Quantum-ESPRESSO-Course-for-Solid-State-Physics-A-Hands-On-Guide/Saito-Tuan-Hung-Tresna-Nugraha/p/book/9789814968379" class="btn btn-warning">Routledge (T&F)</a></p>
 	
 <p> <a target="_blank" href="https://github.com/nguyen-group/QE-SSP">Source files of the textbook <i class="fab fa-github"></i></a></p>
 
