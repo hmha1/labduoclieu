@@ -4,22 +4,21 @@ layout: page
 permalink: "/lectures"
 ---
 
-#### Summer Workshop 2023: An Introduction First-Principles Calculations and Deep Learning for Engineers
-28/7/2022, Hanoi University of Science and Technology, Hanoi, Vietnam. 
->For details, please visit the workshop website: [https://nguyen-group.github.io/lectures/cms2023/](https://nguyen-group.github.io/lectures/cms2023/)
-
+#### Bài giảng dược liệu 1 tại trường đại học Dược Hà nội
+05/03/2023, khoa dược liệu - dược học cổ truyền, trường Đại Học Dược Hà Nội
+>Quá trình giảng dạy của cô Hằng
 <table width="800">
     <tr>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/cms2023-1.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/cms2023-2.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
     </tr>
     <tr>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/cms2023-3.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
         <td style="text-align: center;">
             <img src="{{site.baseurl}}/assets/images/lectures/cms2023-4.jpg" alt="" />
@@ -29,51 +28,50 @@ permalink: "/lectures"
 
 <br>
 
-#### Summer Meeting 2022: Interdisciplinary Materials Science
-19-20/7/2022, Hanoi University of Science and Technology, Hanoi, Vietnam. 
->For details, please visit the workshop website: [https://nguyen-group.github.io/lectures/ims2022](https://nguyen-group.github.io/lectures/ims2022)
+#### Cuộc họp nhóm nghiên cứu tại bộ môn Dược liệu
+2024, bộ môn Dược liêu, trường đại học Dược Hà Nội
+>Triển khai kế hoạch thực hiện đề tài
 
 <table width="800">
     <tr>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/ims2022-1.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/ims2022-2.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
     </tr>
     <tr>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/ims2022-3.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/ims2022-4.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
     </tr>
 </table>
 
 <br>
 
-#### First Principles Workshop: An introduction and hands‑on tutorials with Quantum ESPRESSO
-26/2/2016, Tohoku University, Sendai, Japan. 
+#### Khảo sát tiến độ đề tài
+2024, hình ảnh phòng thí nghiệm
 >For details, please visit the workshop website: 
-<a href="https:sites.google.com/site/fpw2016md/">https:sites.google.com/site/fpw2016md/</a>
 
 <table width="800">
     <tr>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/qe2016-1.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/qe2016-2.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
     </tr>
     <tr>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/qe2016-3.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/qe2016-4.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
     </tr>
 </table>
