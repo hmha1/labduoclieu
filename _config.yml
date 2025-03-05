@@ -1,8 +1,8 @@
 name: 'Lab dược liệu Hà Nội'
 title: 'Lab dược liệu Hà Nội'
 description: 'Nhóm nghiên cứu của chúng tôi tập trung vào xây dựng các quy trình chiết xuất, phân lập các hợp chất tự nhiên từ dược liệu, cùng với ứng dụng các phương pháp machine learning và học máy'
-logo: 'assets/images/favicon.png'
-favicon: 'assets/images/favicon.png'
+logo: 'assets/images/logo duoc.png'
+favicon: 'assets/images/logo duoc.png'
 #baseurl: 'https://nguyen-group.github.io'
 lsi: false
 safe: true
