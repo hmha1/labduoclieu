@@ -21,7 +21,7 @@ permalink: "/lectures"
             <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
         <td style="text-align: center;">
-            <img src="{{site.baseurl}}/assets/images/lectures/cms2023-4.jpg" alt="" />
+            <img src="{{site.baseurl}}/assets/images/lectures/.jpg" alt="" />
         </td>
     </tr>
 </table>
