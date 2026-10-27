@@ -13,6 +13,12 @@ export default defineConfig({
     outDir: fileURLToPath(new URL("./github-pages-dist", import.meta.url)),
     emptyOutDir: true,
     sourcemap: false,
+    rollupOptions: {
+      input: Object.fromEntries(["index", "profile", "research", "publications", "journey", "contact"].map((name) => [
+        name,
+        fileURLToPath(new URL(name === "index" ? "./github-pages-src/index.html" : `./github-pages-src/${name}/index.html`, import.meta.url)),
+      ])),
+    },
   },
   resolve: {
     alias: {

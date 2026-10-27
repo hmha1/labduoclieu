@@ -1,11 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Home from "../app/page";
+import { SitePage, type PageId } from "../app/page";
 import "../app/globals.css";
 import "./github.css";
 
-createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root")!;
+const page = (root.dataset.page || "home") as PageId;
+createRoot(root).render(
   <StrictMode>
-    <Home />
+    <SitePage page={page} />
   </StrictMode>,
 );
