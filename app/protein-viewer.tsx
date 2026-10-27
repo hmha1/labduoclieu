@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { renderBackbone } from "./protein-fallback";
 
 type Viewer = {
   addModel(data: string, format: string): void;
@@ -14,6 +15,12 @@ type Viewer = {
 
 type MolLibrary = { createViewer(element: HTMLElement, config: object): Viewer };
 declare global { interface Window { $3Dmol?: MolLibrary } }
+
+function clearRendered(element: HTMLElement) {
+  for (const child of Array.from(element.children)) {
+    if (!child.classList.contains("protein-status")) child.remove();
+  }
+}
 
 let libraryPromise: Promise<MolLibrary> | undefined;
 
@@ -35,30 +42,39 @@ function loadLibrary(src: string): Promise<MolLibrary> {
 export default function ProteinViewer({ lang }: { lang: "en" | "vi" }) {
   const element = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
+  const [fallback, setFallback] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     let viewer: Viewer | undefined;
+    let stopFallback: (() => void) | undefined;
     const base = window.location.pathname.startsWith("/labduoclieu/") ? "/labduoclieu/" : "/";
     const controller = new AbortController();
 
-    Promise.all([
-      loadLibrary(`${base}3Dmol-min.js`),
-      fetch(`${base}4EY4.pdb`, { signal: controller.signal }).then((response) => {
+    fetch(`${base}4EY4.pdb`, { signal: controller.signal }).then((response) => {
         if (!response.ok) throw new Error(`PDB download failed: ${response.status}`);
         return response.text();
-      }),
-    ]).then(([mol, pdb]) => {
+      }).then(async (pdb) => {
       if (cancelled || !element.current) return;
-      viewer = mol.createViewer(element.current, { antialias: true });
-      viewer.setBackgroundColor("#10231f");
-      viewer.addModel(pdb, "pdb");
-      // A ribbon is a standard rendering of the deposited atomic coordinates.
-      viewer.setStyle({ chain: "A", hetflag: false }, { cartoon: { color: "#d8ff5f" } });
-      viewer.setStyle({ chain: "B", hetflag: false }, { cartoon: { color: "#70cbd1" } });
-      viewer.zoomTo();
-      viewer.render();
-      viewer.spin("y", 0.55, true);
+      try {
+        if (!document.createElement("canvas").getContext("webgl")) throw new Error("WebGL unavailable");
+        const mol = await loadLibrary(`${base}3Dmol-min.js`);
+        if (cancelled || !element.current) return;
+        viewer = mol.createViewer(element.current, { antialias: true });
+        viewer.setBackgroundColor("#10231f");
+        viewer.addModel(pdb, "pdb");
+        // A ribbon is a standard rendering of the deposited atomic coordinates.
+        viewer.setStyle({ chain: "A", hetflag: false }, { cartoon: { color: "#d8ff5f" } });
+        viewer.setStyle({ chain: "B", hetflag: false }, { cartoon: { color: "#70cbd1" } });
+        viewer.zoomTo();
+        viewer.render();
+        viewer.spin("y", 0.55, true);
+      } catch {
+        if (cancelled || !element.current) return;
+        clearRendered(element.current);
+        stopFallback = renderBackbone(element.current, pdb);
+        setFallback(true);
+      }
       setState("ready");
     }).catch(() => { if (!cancelled) setState("error"); });
 
@@ -69,7 +85,8 @@ export default function ProteinViewer({ lang }: { lang: "en" | "vi" }) {
       controller.abort();
       window.removeEventListener("resize", resize);
       viewer?.spin(false);
-      element.current?.replaceChildren();
+      stopFallback?.();
+      if (element.current) clearRendered(element.current);
     };
   }, []);
 
@@ -79,7 +96,7 @@ export default function ProteinViewer({ lang }: { lang: "en" | "vi" }) {
       {state !== "ready" && <p className="protein-status">{state === "error" ? (lang === "vi" ? "Không tải được mô hình 3D. Xem cấu trúc trên RCSB PDB." : "3D model unavailable. View the structure at RCSB PDB.") : (lang === "vi" ? "Đang tải tọa độ nguyên tử…" : "Loading atomic coordinates…")}</p>}
     </div>
     <div className="protein-caption">
-      <div><strong>Acetylcholinesterase · Homo sapiens</strong><small>{lang === "vi" ? "Cấu trúc tinh thể trạng thái không gắn chất ức chế · 2,16 Å · xoay liên tục" : "Apo crystal structure · 2.16 Å · continuous rotation"}</small></div>
+      <div><strong>Acetylcholinesterase · Homo sapiens</strong><small>{fallback ? (lang === "vi" ? "Vết Cα từ PDB · hình chiếu xoay liên tục" : "PDB Cα trace · continuously rotating projection") : (lang === "vi" ? "Cấu trúc tinh thể trạng thái không gắn chất ức chế · 2,16 Å · xoay liên tục" : "Apo crystal structure · 2.16 Å · continuous rotation")}</small></div>
       <a href="https://www.rcsb.org/structure/4EY4" target="_blank" rel="noreferrer">{lang === "vi" ? "Xem PDB gốc" : "View source PDB"} ↗</a>
     </div>
   </div>;
