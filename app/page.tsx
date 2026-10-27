@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ProteinViewer from "./protein-viewer";
 
 type Lang = "en" | "vi";
+type Theme = "classic" | "light";
 export type PageId = "home" | "profile" | "research" | "publications" | "journey" | "contact";
 
 const research = [
@@ -89,19 +90,13 @@ const publications = [
 
 const text = {
   en: {
-    nav: ["Profile", "Research", "Publications", "Journey", "Contact"],
+    nav: ["Home", "Profile", "Research", "Publications", "Journey", "Contact"],
     heroTag: "Computational drug discovery · Hanoi, Vietnam",
     heroA: "Molecular intelligence",
     heroB: "for better drug discovery.",
     heroP: "I work where pharmaceutical science, molecular data, and artificial intelligence meet — turning complex evidence into testable drug-discovery decisions.",
     explore: "Explore the research",
     talk: "Start a conversation",
-    atlas: "Research atlas",
-    atlasHint: "Select a node",
-    open: "Open to research collaboration",
-    outputs: "Scholarly outputs",
-    degrees: "Pharmacy degrees",
-    hup: "Research at HUP",
     profileK: "Profile / 01",
     profileH: "A pharmaceutical researcher shaped by both medicinal plants and molecular machines.",
     profileP1: "My work focuses on computational methods that make early drug discovery more rigorous: chemical data curation, predictive modeling, virtual screening, and mechanistic interpretation.",
@@ -109,21 +104,12 @@ const text = {
     researchK: "Research / 02",
     researchH: "Three connected directions, one translational objective.",
     researchP: "The strongest questions rarely stay inside one discipline. Biological context, chemical evidence, and deployable AI inform one another.",
-    logicK: "Working logic",
-    logicH: "From data to a decision worth testing.",
-    steps: ["Curate", "Model", "Explain", "Validate"],
-    stepP: [
-      "Build chemically and biologically defensible datasets.",
-      "Match molecular representations and methods to the scientific question.",
-      "Interrogate predictions through XAI, chemical space, and mechanism.",
-      "Prioritize hypotheses for molecular simulation and experiment.",
-    ],
     pubK: "Publications / 03",
     pubH: "Selected scientific work.",
     pubHint: "Select a publication to read its focus",
     openPub: "Open publication",
     journeyK: "Journey / 04",
-    journeyH: "Pharmacy training, computational questions.",
+    journeyIntro: "I am a pharmacist working across medicinal plant research and computational drug discovery. My work combines modern extraction methods, algorithmic process optimization, and deep learning to study natural compounds and medicinal plants.",
     lecturer: "Lecturer",
     lecturerPlace: "Hanoi University of Pharmacy",
     lecturerDate: "August 2026 — Present",
@@ -148,19 +134,13 @@ const text = {
     top: "Back to top",
   },
   vi: {
-    nav: ["Hồ sơ", "Nghiên cứu", "Công bố", "Hành trình", "Liên hệ"],
+    nav: ["Trang chủ", "Hồ sơ", "Nghiên cứu", "Công bố", "Hành trình", "Liên hệ"],
     heroTag: "Khám phá thuốc bằng phương pháp tính toán · Hà Nội",
     heroA: "Trí tuệ phân tử",
     heroB: "cho quyết định tốt hơn.",
     heroP: "Tôi nghiên cứu tại giao điểm của khoa học dược, dữ liệu phân tử và trí tuệ nhân tạo — chuyển bằng chứng phức tạp thành các giả thuyết có thể kiểm chứng trong khám phá thuốc.",
     explore: "Khám phá nghiên cứu",
     talk: "Trao đổi hợp tác",
-    atlas: "Bản đồ nghiên cứu",
-    atlasHint: "Chọn một nút",
-    open: "Sẵn sàng hợp tác nghiên cứu",
-    outputs: "Công bố khoa học",
-    degrees: "Bằng cấp ngành Dược",
-    hup: "Nghiên cứu tại HUP",
     profileK: "Hồ sơ / 01",
     profileH: "Nghiên cứu dược liệu và các phương pháp tính toán ở cấp độ phân tử.",
     profileP1: "Công việc của tôi tập trung vào phương pháp tính toán trong giai đoạn đầu khám phá thuốc: xử lý và chuẩn hóa dữ liệu hóa học, xây dựng mô hình dự đoán, sàng lọc ảo và diễn giải cơ chế tác dụng.",
@@ -168,21 +148,12 @@ const text = {
     researchK: "Nghiên cứu / 02",
     researchH: "Ba hướng nghiên cứu kết nối từ dữ liệu đến giả thuyết thực nghiệm.",
     researchP: "Bối cảnh sinh học, dữ liệu hóa học và phương pháp AI bổ trợ nhau khi xác định đích tác dụng và ưu tiên giả thuyết nghiên cứu.",
-    logicK: "Quy trình nghiên cứu",
-    logicH: "Từ dữ liệu đến giả thuyết có thể kiểm chứng.",
-    steps: ["Chuẩn hóa", "Mô hình", "Giải thích", "Kiểm chứng"],
-    stepP: [
-      "Xây dựng bộ dữ liệu hợp lý về hóa học và sinh học.",
-      "Ghép biểu diễn phân tử và phương pháp với đúng câu hỏi khoa học.",
-      "Diễn giải dự đoán bằng AI có thể giải thích, phân tích không gian hóa học và cơ chế tác dụng.",
-      "Ưu tiên giả thuyết cho mô phỏng phân tử và thực nghiệm.",
-    ],
     pubK: "Công bố / 03",
     pubH: "Các nghiên cứu tiêu biểu.",
     pubHint: "Chọn một công bố để xem trọng tâm",
     openPub: "Mở công bố",
     journeyK: "Hành trình / 04",
-    journeyH: "Nền tảng dược học, câu hỏi tính toán.",
+    journeyIntro: "Tôi là dược sĩ nghiên cứu dược liệu và khám phá thuốc bằng phương pháp tính toán. Công việc của tôi kết hợp kỹ thuật chiết xuất hiện đại, tối ưu hóa quy trình bằng thuật toán và học sâu trong nghiên cứu hợp chất tự nhiên, cây thuốc.",
     lecturer: "Giảng viên",
     lecturerPlace: "Trường Đại học Dược Hà Nội",
     lecturerDate: "08/2026 — Hiện tại",
@@ -208,24 +179,31 @@ const text = {
   },
 };
 
-const ids = ["profile", "research", "publications", "journey", "contact"] as const;
+const ids = ["home", "profile", "research", "publications", "journey", "contact"] as const;
 const hrefFor = (current: PageId, destination: PageId) =>
   current === "home" ? (destination === "home" ? "./" : `${destination}/`) :
     destination === "home" ? "../" : `../${destination}/`;
 
 export function SitePage({ page }: { page: PageId }) {
   const [lang, setLang] = useState<Lang>("en");
+  const [theme, setTheme] = useState<Theme>("classic");
   const [focus, setFocus] = useState(1);
   const [pub, setPub] = useState(0);
-  const [step, setStep] = useState(0);
   const [menu, setMenu] = useState(false);
   const t = text[lang];
   useEffect(() => {
     const saved = window.localStorage.getItem("hahm-lang");
     if (saved === "vi" || saved === "en") setLang(saved);
+    if (window.localStorage.getItem("hahm-theme") === "light") setTheme("light");
   }, []);
   useEffect(() => { document.documentElement.lang = lang; }, [lang]);
+  useEffect(() => { document.documentElement.dataset.theme = theme; }, [theme]);
   const changeLang = (next: Lang) => { setLang(next); window.localStorage.setItem("hahm-lang", next); };
+  const changeTheme = () => {
+    const next = theme === "light" ? "classic" : "light";
+    setTheme(next);
+    window.localStorage.setItem("hahm-theme", next);
+  };
   const journeyItems = [
     { date: t.lecturerDate, title: t.lecturer, place: t.lecturerPlace },
     { date: t.workDate, title: t.work, place: t.workPlace, detail: t.workP },
@@ -277,6 +255,7 @@ export function SitePage({ page }: { page: PageId }) {
           {nav.map((item) => <a key={item.id} href={hrefFor(page, item.id)} className={page === item.id ? "active" : ""} aria-current={page === item.id ? "page" : undefined} onClick={() => setMenu(false)}>{item.label}</a>)}
         </nav>
         <div className="header-actions">
+          <button className="theme-toggle" onClick={changeTheme} aria-pressed={theme === "light"} aria-label={theme === "light" ? (lang === "vi" ? "Trở về giao diện mặc định" : "Return to classic theme") : (lang === "vi" ? "Bật giao diện sáng" : "Turn on light theme")}><span aria-hidden="true">☼</span> {theme === "light" ? (lang === "vi" ? "Mặc định" : "Classic") : (lang === "vi" ? "Sáng" : "Light")}</button>
           <div className="langs"><button className={lang === "en" ? "active" : ""} onClick={() => changeLang("en")}>EN</button><i>/</i><button className={lang === "vi" ? "active" : ""} onClick={() => changeLang("vi")}>VI</button></div>
           <button className="hamburger" onClick={() => setMenu(!menu)} aria-label="Toggle menu" aria-expanded={menu}><i /><i /></button>
         </div>
@@ -292,7 +271,6 @@ export function SitePage({ page }: { page: PageId }) {
           </div>
           <ProteinViewer lang={lang} />
         </div>
-        <div className="shell metrics"><div><b>03</b><span>{t.outputs}</span></div><div><b>02</b><span>{t.degrees}</span></div><div><b>2024—</b><span>{t.hup}</span></div><p><i className="live" />{t.open}</p></div>
       </section>}
 
       {page === "profile" && <section id="profile" className="section profile page-section">
@@ -303,7 +281,6 @@ export function SitePage({ page }: { page: PageId }) {
         <div className="shell">
           <div className="section-head reveal"><p className="kicker">{t.researchK}</p><h2>{t.researchH}</h2><p>{t.researchP}</p></div>
           <div className="research-grid">{research.map((r, i) => <button key={r.no} className={`research-card reveal ${focus === i ? "active" : ""}`} onClick={() => setFocus(i)}><div><small>{r.no}</small><i>↗</i></div><h3>{r.title[lang]}</h3><p>{r.desc[lang]}</p><footer>{r.tags[lang].map((tag) => <span key={tag}>{tag}</span>)}</footer></button>)}</div>
-          <div className="logic reveal"><div><p className="kicker">{t.logicK}</p><h3>{t.logicH}</h3></div><div className="logic-ui"><div className="step-buttons">{t.steps.map((name, i) => <button key={name} className={step === i ? "active" : ""} onClick={() => setStep(i)}><b>0{i + 1}</b><span>{name}</span></button>)}</div><div className="step-detail" key={`${step}-${lang}`}><b>0{step + 1}</b><p>{t.stepP[step]}</p></div></div></div>
         </div>
       </section>}
 
@@ -312,7 +289,7 @@ export function SitePage({ page }: { page: PageId }) {
       </section>}
 
       {page === "journey" && <section id="journey" className="section journey page-section">
-        <div className="shell"><div className="section-head reveal"><p className="kicker">{t.journeyK}</p><h2>{t.journeyH}</h2></div><div className="journey-grid"><div className="timeline reveal">{journeyItems.map((item, i) => <article key={item.title}><div className={`marker ${i === 0 ? "current" : ""}`}><i /></div><div><time>{item.date}</time><h3>{item.title}</h3><b>{item.place}</b>{item.detail && <p>{item.detail}</p>}</div></article>)}</div><aside className="toolkit reveal"><p className="kicker">{t.toolkit}</p>{[["01","Python · R","RDKit · scikit-learn · PyTorch"],["02","Molecular modeling","AutoDock Vina · NAMD · VMD"],["03","Data & interpretation","QSAR · XAI · Network pharmacology"]].map((x) => <div key={x[0]}><small>{x[0]}</small><b>{x[1]}</b><span>{x[2]}</span></div>)}</aside></div></div>
+        <div className="shell"><div className="journey-intro reveal"><p className="kicker">{t.journeyK}</p><p>{t.journeyIntro}</p></div><div className="journey-grid"><div className="timeline reveal">{journeyItems.map((item, i) => <article key={item.title}><div className={`marker ${i === 0 ? "current" : ""}`}><i /></div><div><time>{item.date}</time><h3>{item.title}</h3><b>{item.place}</b>{item.detail && <p>{item.detail}</p>}</div></article>)}</div><aside className="toolkit reveal"><p className="kicker">{t.toolkit}</p>{[["01","Python · R","RDKit · scikit-learn · PyTorch"],["02","Molecular modeling","AutoDock Vina · NAMD · VMD"],["03","Data & interpretation","QSAR · XAI · Network pharmacology"]].map((x) => <div key={x[0]}><small>{x[0]}</small><b>{x[1]}</b><span>{x[2]}</span></div>)}</aside></div></div>
       </section>}
 
       {page === "contact" && <section id="contact" className="contact page-section">
